@@ -2,7 +2,21 @@ const trimTrailingSlash = (value) => value.replace(/\/+$/, '');
 
 const toBoolean = (value) => String(value || '').toLowerCase() === 'true';
 
-export const API_BASE_URL = trimTrailingSlash(import.meta.env.VITE_API_BASE_URL || '/api');
+const normalizeApiUrl = (value) => {
+  if (!value) {
+    return null;
+  }
+
+  const trimmed = trimTrailingSlash(value);
+  return trimmed.endsWith('/api') ? trimmed : `${trimmed}/api`;
+};
+
+const resolvedApiBase =
+  normalizeApiUrl(import.meta.env.VITE_API_URL) ||
+  import.meta.env.VITE_API_BASE_URL ||
+  '/api';
+
+export const API_BASE_URL = trimTrailingSlash(resolvedApiBase);
 export const FORCE_MOCK_DATA = toBoolean(import.meta.env.VITE_USE_MOCK_DATA);
 
 export class ApiError extends Error {
