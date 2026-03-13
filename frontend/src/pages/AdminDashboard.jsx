@@ -15,35 +15,35 @@ const DEFAULT_FORM = {
 };
 
 const CSS = {
-  page: 'mx-auto max-w-7xl px-4 py-8',
-  pageTitle: 'text-2xl font-bold text-slate-900',
-  pageSubtitle: 'mt-1 text-slate-600',
+  page: 'mx-auto max-w-7xl px-4 py-10',
+  pageTitle: 'text-2xl font-semibold text-slate-900',
+  pageSubtitle: 'mt-2 text-slate-600',
   statsGrid: 'mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4',
-  chartGrid: 'mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2',
-  sectionGrid: 'mt-5 grid grid-cols-1 gap-4 lg:grid-cols-[360px_1fr]',
-  card: 'rounded-xl border border-slate-200 bg-white p-4 shadow-sm',
+  chartGrid: 'mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2',
+  sectionGrid: 'mt-6 grid grid-cols-1 gap-4 lg:grid-cols-[360px_1fr]',
+  card: 'glass-panel p-5',
   cardTitle: 'text-lg font-semibold text-slate-900',
   cardTitleWithMargin: 'mb-3 text-lg font-semibold text-slate-900',
   chartWrap: 'h-72 w-full',
   form: 'mt-3 space-y-2',
-  label: 'block text-sm font-medium text-slate-700',
-  input: 'mt-1 w-full rounded-md border border-slate-300 px-3 py-2',
-  inputCompact: 'mt-1 w-full rounded-md border border-slate-300 px-2 py-2',
+  label: 'block text-sm font-semibold text-slate-700',
+  input: 'input-field mt-1',
+  inputCompact: 'input-field mt-1 px-3 py-2 text-sm',
   checkboxRow: 'flex items-center gap-2 text-sm text-slate-700',
   error: 'text-sm text-red-600',
-  buttonPrimary: 'rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:bg-slate-400',
-  buttonSecondary: 'rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700',
-  buttonUtility: 'rounded-md border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700',
+  buttonPrimary: 'btn-primary disabled:cursor-not-allowed disabled:opacity-60',
+  buttonSecondary: 'btn-outline',
+  buttonUtility: 'btn-outline',
   buttonRow: 'flex gap-2',
   splitTwo: 'grid grid-cols-2 gap-2',
   splitThree: 'grid grid-cols-3 gap-2',
   tableWrap: 'mt-3 overflow-x-auto',
   table: 'min-w-full text-sm',
-  tableHeadRow: 'border-b border-slate-200 text-left text-slate-500',
-  tableBodyRow: 'border-b border-slate-100',
+  tableHeadRow: 'border-b border-white/70 text-left text-slate-500',
+  tableBodyRow: 'border-b border-white/60 transition hover:bg-white/60',
   actionButtons: 'flex gap-2',
-  actionEdit: 'rounded border border-slate-300 px-2 py-1 text-xs',
-  actionDelete: 'rounded border border-red-200 px-2 py-1 text-xs text-red-600 disabled:cursor-not-allowed disabled:opacity-50'
+  actionEdit: 'rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-semibold text-slate-700',
+  actionDelete: 'rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-700 disabled:cursor-not-allowed disabled:opacity-50'
 };
 
 function detectPlatform(url) {
@@ -181,7 +181,7 @@ function AdminDashboard() {
       <p className={CSS.pageSubtitle}>Manage products and monitor sales analytics.</p>
 
       {backendStatus === 'offline' && adminReadOnly && backendNotice ? (
-        <div className="mt-4 rounded-md border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+        <div className="mt-4 rounded-xl border border-orange-200 bg-orange-50 px-4 py-3 text-sm text-orange-900">
           {backendNotice} Product management is currently read-only.
         </div>
       ) : null}
@@ -199,11 +199,11 @@ function AdminDashboard() {
           <div className={CSS.chartWrap}>
             <ResponsiveContainer>
               <LineChart data={salesData}>
-                <CartesianGrid strokeDasharray="3 3" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                 <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip />
-                <Line type="monotone" dataKey="sales" stroke="#111827" strokeWidth={2} />
+                <Line type="monotone" dataKey="sales" stroke="#0f172a" strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -214,11 +214,11 @@ function AdminDashboard() {
           <div className={CSS.chartWrap}>
             <ResponsiveContainer>
               <BarChart data={topProducts}>
-                <CartesianGrid strokeDasharray="3 3" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                 <XAxis dataKey="name" hide />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="sold" fill="#f59e0b" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="sold" fill="#f97316" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

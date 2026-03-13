@@ -66,9 +66,9 @@ function Checkout() {
 
   if (complete) {
     return (
-      <section className="mx-auto max-w-3xl px-4 py-10">
-        <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-6">
-          <h2 className="text-2xl font-bold text-emerald-900">Checkout Initialized</h2>
+      <section className="mx-auto max-w-3xl px-4 py-12">
+        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 shadow-sm shadow-emerald-100">
+          <h2 className="text-2xl font-semibold text-emerald-900">Checkout Initialized</h2>
           <p className="mt-2 text-emerald-800">
             Your order was created successfully. Continue payment in the Ecobank checkout window (if provided).
           </p>
@@ -78,39 +78,39 @@ function Checkout() {
   }
 
   return (
-    <section className="mx-auto grid max-w-6xl gap-5 px-4 py-8 lg:grid-cols-[1fr_360px]">
-      <form className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm" onSubmit={submitPayment}>
-        <h2 className="text-xl font-bold text-slate-900">Secure Checkout</h2>
+    <section className="mx-auto grid max-w-6xl gap-6 px-4 py-10 lg:grid-cols-[1fr_360px]">
+      <form className="glass-panel p-6" onSubmit={submitPayment}>
+        <h2 className="text-xl font-semibold text-slate-900">Secure Checkout</h2>
         <p className="mt-1 text-sm text-slate-600">This checkout creates an order and initiates Ecobank payment.</p>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
-          <label className="text-sm font-medium text-slate-700">
+          <label className="text-sm font-semibold text-slate-700">
             Full Name
             <input
               required
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
-              className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
+              className="input-field mt-1"
             />
           </label>
-          <label className="text-sm font-medium text-slate-700">
+          <label className="text-sm font-semibold text-slate-700">
             Email
             <input
               required
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
+              className="input-field mt-1"
             />
           </label>
-          <label className="text-sm font-medium text-slate-700 sm:col-span-2">
+          <label className="text-sm font-semibold text-slate-700 sm:col-span-2">
             Phone Number
             <input
               required
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               placeholder="07XXXXXXXX"
-              className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
+              className="input-field mt-1"
             />
           </label>
         </div>
@@ -119,20 +119,20 @@ function Checkout() {
 
         <button
           disabled={processing || items.length === 0}
-          className="mt-5 rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:bg-slate-400"
+          className="btn-primary mt-5 w-full disabled:cursor-not-allowed disabled:opacity-60"
           type="submit"
         >
           {processing ? 'Processing...' : 'Checkout with Ecobank'}
         </button>
       </form>
 
-      <aside className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+      <aside className="glass-panel p-6">
         <h3 className="text-lg font-semibold text-slate-900">Order Summary</h3>
         <div className="mt-3 space-y-2 text-sm text-slate-600">
           <p className="flex justify-between"><span>Items</span><span>${subtotal.toFixed(2)}</span></p>
           <p className="flex justify-between"><span>Shipping</span><span>${shipping.toFixed(2)}</span></p>
           <p className="flex justify-between"><span>Tax</span><span>${tax.toFixed(2)}</span></p>
-          <hr className="my-2" />
+          <hr className="my-2 border-white/60" />
           <p className="flex justify-between text-base font-bold text-slate-900"><span>Total</span><span>${total.toFixed(2)}</span></p>
         </div>
       </aside>

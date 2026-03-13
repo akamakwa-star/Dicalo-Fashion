@@ -9,6 +9,10 @@ export default {
           600: '#0f172a'
         },
         accent: '#f59e0b'
+      },
+      fontFamily: {
+        display: ['"Fraunces"', 'ui-serif', 'Georgia', 'serif'],
+        sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif']
       }
     }
   },

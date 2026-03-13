@@ -2,20 +2,20 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../features/cart/cartSlice';
 
 const CSS = {
-  card: 'flex h-full flex-col border border-slate-200 bg-white p-3 text-slate-900 transition hover:border-amber-400 hover:shadow-sm',
-  imageWrap: 'flex h-52 items-center justify-center bg-white p-2',
-  image: 'h-full w-full object-contain',
-  content: 'mt-3 flex flex-1 flex-col',
-  title: 'line-clamp-2 text-[15px] leading-5 text-slate-900',
+  card: 'glass-panel group flex h-full flex-col p-4 text-slate-900 transition duration-300 hover:-translate-y-1 hover:shadow-xl',
+  imageWrap: 'flex h-52 items-center justify-center rounded-2xl bg-white/70 p-3',
+  image: 'h-full w-full object-contain transition duration-300 group-hover:scale-105',
+  content: 'mt-4 flex flex-1 flex-col',
+  title: 'line-clamp-2 text-[15px] font-semibold leading-5 text-slate-900',
   ratingRow: 'mt-2 flex items-center gap-2 text-sm leading-none',
-  ratingCount: 'text-sky-700',
-  price: 'mt-2 text-2xl leading-none text-slate-900',
+  ratingCount: 'text-slate-500',
+  price: 'mt-3 text-2xl font-semibold leading-none text-slate-900',
   dollarSign: 'align-top text-sm',
-  delivery: 'mt-1 text-xs text-emerald-700',
+  delivery: 'mt-1 text-xs font-semibold uppercase tracking-[0.25em] text-emerald-700',
   category: 'mt-1 text-xs text-slate-600',
   seller: 'mt-1 text-xs text-slate-500',
-  sourceLink: 'mt-1 text-xs text-sky-700 hover:underline',
-  addButton: 'mt-3 w-full rounded-full border border-amber-400 bg-amber-300 px-4 py-2 text-sm font-medium text-slate-900 transition hover:bg-amber-400'
+  sourceLink: 'mt-2 text-xs font-semibold text-orange-600 hover:text-orange-500',
+  addButton: 'btn-soft mt-4 w-full'
 };
 
 const renderStars = (rating) => {
@@ -29,14 +29,15 @@ const renderStars = (rating) => {
   ));
 };
 
-function ProductCard({ product }) {
+function ProductCard({ product, index = 0 }) {
   const dispatch = useDispatch();
   const price = Number(product.price || 0);
   const rating = Number(product.rating || 4);
   const reviews = Number(product.reviews || Math.floor(rating * 42));
+  const delay = `${Math.min(index, 8) * 70}ms`;
 
   return (
-    <article className={CSS.card}>
+    <article className={`${CSS.card} animate-fade-up`} style={{ animationDelay: delay }}>
       <div className={CSS.imageWrap}>
         <img
           src={product.image || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80'}

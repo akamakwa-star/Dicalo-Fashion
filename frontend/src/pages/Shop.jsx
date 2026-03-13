@@ -27,20 +27,28 @@ function Shop() {
   }, [items, query, category, sortBy]);
 
   return (
-    <section className="min-h-screen bg-slate-100 py-6">
+    <section className="py-10">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="rounded-md border border-slate-300 bg-white p-4">
-          <div className="grid gap-3 md:grid-cols-[1fr_220px_220px]">
+        <div className="mb-6 flex flex-col gap-3 animate-fade-up">
+          <span className="chip">Curated marketplace</span>
+          <h1 className="text-3xl font-semibold text-slate-900 sm:text-4xl">Shop the edit</h1>
+          <p className="max-w-2xl text-slate-600">
+            Filter by category, browse by price, and discover the latest items pulled from connected marketplaces.
+          </p>
+        </div>
+
+        <div className="glass-panel p-4 animate-fade-up" style={{ animationDelay: '80ms' }}>
+          <div className="grid gap-3 md:grid-cols-[1.1fr_220px_220px]">
             <input
               value={query}
               onChange={(e) => dispatch(setQuery(e.target.value))}
-              placeholder="Search Amazon style products"
-              className="rounded-md border border-slate-400 px-3 py-2 text-sm outline-none focus:border-amber-500"
+              placeholder="Search curated pieces"
+              className="input-field"
             />
             <select
               value={category}
               onChange={(e) => dispatch(setCategory(e.target.value))}
-              className="rounded-md border border-slate-400 px-3 py-2 text-sm outline-none focus:border-amber-500"
+              className="select-field"
             >
               <option value="all">All departments</option>
               <option value="women">Women</option>
@@ -51,7 +59,7 @@ function Shop() {
             <select
               value={sortBy}
               onChange={(e) => dispatch(setSortBy(e.target.value))}
-              className="rounded-md border border-slate-400 px-3 py-2 text-sm outline-none focus:border-amber-500"
+              className="select-field"
             >
               <option value="featured">Featured</option>
               <option value="price-asc">Price: Low to High</option>
@@ -61,14 +69,15 @@ function Shop() {
           </div>
         </div>
 
-        <div className="mt-4 border-b border-slate-300 pb-2">
-          <p className="text-sm text-slate-700">
+        <div className="mt-5 flex flex-wrap items-center justify-between gap-2 border-b border-white/60 pb-2 text-sm text-slate-600">
+          <p>
             {filtered.length > 0 ? `1-${filtered.length}` : '0-0'} of {filtered.length} results
           </p>
+          <p>Updated daily with new arrivals.</p>
         </div>
 
         {backendStatus === 'offline' && backendNotice ? (
-          <div className="mt-4 rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+          <div className="mt-4 rounded-xl border border-orange-200 bg-orange-50 px-4 py-3 text-sm text-orange-900">
             {backendNotice}
           </div>
         ) : null}
@@ -79,9 +88,9 @@ function Shop() {
           <p className="mt-6 text-slate-700">No products to display yet. Waiting for backend products.</p>
         ) : null}
 
-        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {filtered.map((product) => (
-            <ProductCard key={product.id} product={product} />
+        <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {filtered.map((product, index) => (
+            <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
       </div>

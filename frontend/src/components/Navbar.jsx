@@ -17,22 +17,52 @@ function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+    <header className="sticky top-0 z-40 border-b border-white/60 bg-white/70 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3">
         <BrandLogo compact />
-        <nav className="flex items-center gap-2 text-sm sm:gap-4 sm:text-base">
-          <NavLink to={ROUTES.HOME} className={({ isActive }) => (isActive ? 'font-semibold text-slate-900' : 'text-slate-600')}>Home</NavLink>
-          <NavLink to={ROUTES.SHOP} className={({ isActive }) => (isActive ? 'font-semibold text-slate-900' : 'text-slate-600')}>Shop</NavLink>
-          {isAdmin ? <NavLink to={ROUTES.ADMIN} className={({ isActive }) => (isActive ? 'font-semibold text-slate-900' : 'text-slate-600')}>Admin</NavLink> : null}
-          <NavLink to={ROUTES.CART} className="rounded-full bg-amber-400 px-3 py-1 font-semibold text-slate-900">Cart ({totalQuantity})</NavLink>
+
+        <nav className="order-3 w-full rounded-full bg-white/70 p-1 text-sm shadow-sm shadow-slate-900/5 sm:order-none sm:w-auto">
+          <div className="flex flex-wrap items-center gap-1">
+            <NavLink
+              to={ROUTES.HOME}
+              className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`.trim()}
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to={ROUTES.SHOP}
+              className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`.trim()}
+            >
+              Shop
+            </NavLink>
+            {isAdmin ? (
+              <NavLink
+                to={ROUTES.ADMIN}
+                className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`.trim()}
+              >
+                Admin
+              </NavLink>
+            ) : null}
+          </div>
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <NavLink to={ROUTES.CART} className="btn-accent gap-2">
+            Cart
+            <span className="rounded-full bg-white/30 px-2 py-0.5 text-xs font-semibold text-white">
+              {totalQuantity}
+            </span>
+          </NavLink>
           {isAuthenticated ? (
-            <button onClick={signOut} className="rounded-md border border-slate-300 px-3 py-1 text-sm font-semibold text-slate-700">
+            <button onClick={signOut} className="btn-outline">
               Sign out ({user?.email || 'user'})
             </button>
           ) : (
-            <NavLink to={ROUTES.LOGIN} className="rounded-md border border-slate-300 px-3 py-1 text-sm font-semibold text-slate-700">Sign in</NavLink>
+            <NavLink to={ROUTES.LOGIN} className="btn-outline">
+              Sign in
+            </NavLink>
           )}
-        </nav>
+        </div>
       </div>
     </header>
   );
